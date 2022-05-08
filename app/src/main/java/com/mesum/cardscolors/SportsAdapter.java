@@ -1,6 +1,7 @@
 package com.mesum.cardscolors;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ public class SportsAdapter  extends RecyclerView.Adapter<SportsAdapter.ViewHolde
         mContext = cn;
     }
 
-    class  ViewHolder extends  RecyclerView.ViewHolder{
+    class  ViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView mTitleText;
         private TextView mInfoText;
@@ -33,10 +34,13 @@ public class SportsAdapter  extends RecyclerView.Adapter<SportsAdapter.ViewHolde
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            //Initialize the views
             mTitleText = itemView.findViewById(R.id.title);
             mInfoText = itemView.findViewById(R.id.subTitle);
             mSportsImage = itemView.findViewById(R.id.sports_image);
+
+            // Set the OnClickListener to the entire view.
+            itemView.setOnClickListener(this);
 
 
         }
@@ -45,6 +49,16 @@ public class SportsAdapter  extends RecyclerView.Adapter<SportsAdapter.ViewHolde
             mTitleText.setText(currentSport.getTitle());
             mInfoText.setText(currentSport.getInfo());
             Glide.with(mContext).load(currentSport.getImageResource()).into(mSportsImage);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Sport currentSport = mSportsData.get(getAdapterPosition());
+            Intent detailIntent  = new Intent(mContext, DetailActivity.class);
+            detailIntent.putExtra("title", currentSport.getTitle());
+            detailIntent.putExtra("image_resource", currentSport.getImageResource());
+            mContext.startActivity(detailIntent);
+
         }
     }
 
