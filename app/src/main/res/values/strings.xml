@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cards&amp;Colors</string>
+    <string name="app_name">Sports&amp;News</string>
     <string name="title_placeholder">Headline</string>
     <string name="news_placeholder">News</string>
     <string name="sports_info_placeholder">Current Headline</string>
